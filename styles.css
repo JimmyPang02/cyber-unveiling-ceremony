@@ -1,0 +1,234 @@
+/* 赛博揭牌仪式样式 - 美化版 */
+
+/* 基本页面样式 */
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  overflow: hidden;
+  color: #fff;
+}
+
+/* 容器样式 */
+.ceremony-container {
+  position: relative;
+  width: 90%;
+  max-width: 1200px;
+  height: 80vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+/* 数字红布样式 */
+#digital-curtain {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #e74c3c, #c0392b);
+  z-index: 10;
+  transform-origin: top;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect x="0" y="0" width="100" height="100" fill="none" stroke="%23ffffff20" stroke-width="2"/></svg>');
+  background-size: 50px 50px;
+}
+
+.reveal-animation {
+  animation: revealCurtain 3s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+}
+
+@keyframes revealCurtain {
+  0% { transform: scaleY(1); }
+  100% { transform: scaleY(0); }
+}
+
+/* 俱乐部标志样式 */
+#club-logo {
+  opacity: 0;
+  transform: scale(0.5);
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+#club-logo img {
+  max-width: 250px;
+  height: auto;
+  filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.4));
+}
+
+#club-logo h1 {
+  font-size: 3.5rem;
+  margin: 20px 0;
+  background: linear-gradient(to right, #fff, #ddd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  letter-spacing: 2px;
+}
+
+#club-logo.appear {
+  animation: logoAppear 2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes logoAppear {
+  0% { opacity: 0; transform: scale(0.5); }
+  70% { opacity: 1; transform: scale(1.1); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* 粒子效果样式 */
+.particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,215,0,1) 100%);
+  border-radius: 50%;
+  animation: particleFly 3s ease-out forwards;
+  box-shadow: 0 0 10px 2px rgba(255, 215, 0, 0.5);
+}
+
+@keyframes particleFly {
+  0% { transform: translateY(0) scale(0); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+}
+
+/* 祝贺文字样式 */
+#congratulations {
+  opacity: 0;
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+  transform: translateY(20px);
+  text-align: center;
+  margin: 30px 0;
+}
+
+#congratulations.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#congratulations h2 {
+  font-size: 2rem;
+  font-weight: 300;
+  color: #fff;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  letter-spacing: 1px;
+}
+
+/* 俱乐部信息样式 */
+#club-info {
+  opacity: 0;
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+  transform: translateY(20px);
+  text-align: center;
+  margin: 20px 0;
+  padding: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  width: 80%;
+  max-width: 600px;
+}
+
+#club-info.slide-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#club-info p {
+  font-size: 1.2rem;
+  margin: 10px 0;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* 按钮样式 */
+#reveal-button {
+  position: relative;
+  z-index: 20;
+  padding: 18px 40px;
+  background: linear-gradient(45deg, #3498db, #2980b9);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  margin-top: 40px;
+  transition: all 0.3s;
+  overflow: hidden;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+#reveal-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+}
+
+#reveal-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(45deg, #2980b9, #3498db);
+}
+
+#reveal-button:hover::before {
+  left: 100%;
+}
+
+#reveal-button:active {
+  transform: scale(0.98);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  #club-logo h1 {
+    font-size: 2.5rem;
+  }
+  
+  #congratulations h2 {
+    font-size: 1.5rem;
+  }
+  
+  #club-info p {
+    font-size: 1rem;
+  }
+  
+  #reveal-button {
+    padding: 15px 30px;
+    font-size: 1rem;
+  }
+}
+
+/* 添加网格背景效果 */
+.ceremony-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  background-size: 30px 30px;
+  z-index: -1;
+} 
