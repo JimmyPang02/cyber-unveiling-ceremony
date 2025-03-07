@@ -6,6 +6,11 @@ const audio = document.getElementById('reveal-audio');
 const container = document.querySelector('.ceremony-container');
 const contentWrapper = document.querySelector('.content-wrapper');
 
+// 获取音频元素
+const revealAudio = document.getElementById('reveal-audio');
+const backgroundMusic = document.getElementById('background-music');
+const musicToggle = document.getElementById('music-toggle');
+
 // 创建星星背景
 function createStars() {
   const starsContainer = document.createElement('div');
@@ -31,11 +36,64 @@ function createStars() {
 // 创建星星
 const stars = createStars();
 
+// 创建音频可视化器
+function createAudioVisualizer() {
+  const visualizer = document.createElement('div');
+  visualizer.classList.add('audio-visualizer');
+  container.appendChild(visualizer);
+  
+  // 创建音频条
+  for (let i = 0; i < 30; i++) {
+    const bar = document.createElement('div');
+    bar.classList.add('audio-bar');
+    visualizer.appendChild(bar);
+  }
+  
+  return visualizer;
+}
+
+// 创建音频可视化器
+const visualizer = createAudioVisualizer();
+
+// 音乐控制
+musicToggle.addEventListener('click', () => {
+  if (backgroundMusic.paused) {
+    backgroundMusic.play();
+    musicToggle.classList.remove('muted');
+  } else {
+    backgroundMusic.pause();
+    musicToggle.classList.add('muted');
+  }
+});
+
+// 页面加载时自动播放背景音乐（需要用户交互）
+document.addEventListener('click', () => {
+  if (backgroundMusic.paused) {
+    backgroundMusic.volume = 0.3; // 设置音量
+    backgroundMusic.play().catch(e => console.log('无法自动播放音乐:', e));
+  }
+}, { once: true });
+
 // 按钮点击事件
 revealButton.addEventListener('click', () => {
-  // 播放音效
-  // 如果没有音频文件，可以注释掉下面这行
-  // audio.play();
+  // 播放揭幕音效
+  revealAudio.volume = 1.0;
+  revealAudio.play().catch(e => console.log('无法播放音效:', e));
+  
+  // 如果背景音乐没有播放，开始播放
+  if (backgroundMusic.paused) {
+    backgroundMusic.volume = 0.3;
+    backgroundMusic.play().catch(e => console.log('无法播放背景音乐:', e));
+  } else {
+    // 如果已经在播放，增加音量
+    fadeVolumeUp(backgroundMusic, 0.3, 0.7, 2000);
+  }
+  
+  // 显示音频可视化器
+  setTimeout(() => {
+    visualizer.classList.add('visible');
+    startAudioVisualization();
+  }, 1500);
   
   // 隐藏按钮 - 使用透明度和缩小效果
   revealButton.style.opacity = '0';
@@ -107,6 +165,44 @@ function playCelebrationAnimation() {
   // 显示成立日期
   const foundingDate = document.getElementById('founding-date');
   foundingDate.classList.add('slide-in');
+}
+
+// 音量渐变函数
+function fadeVolumeUp(audioElement, startVolume, endVolume, duration) {
+  const startTime = performance.now();
+  audioElement.volume = startVolume;
+  
+  function updateVolume() {
+    const currentTime = performance.now();
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    
+    audioElement.volume = startVolume + (endVolume - startVolume) * progress;
+    
+    if (progress < 1) {
+      requestAnimationFrame(updateVolume);
+    }
+  }
+  
+  requestAnimationFrame(updateVolume);
+}
+
+// 音频可视化动画
+function startAudioVisualization() {
+  const bars = document.querySelectorAll('.audio-bar');
+  
+  function animateBars() {
+    if (!backgroundMusic.paused) {
+      bars.forEach(bar => {
+        const height = Math.random() * 40 + 5;
+        bar.style.height = `${height}px`;
+      });
+    }
+    
+    requestAnimationFrame(animateBars);
+  }
+  
+  animateBars();
 }
 
 // 添加星星闪烁动画
