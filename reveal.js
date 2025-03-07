@@ -96,13 +96,17 @@ function startParticleEffect() {
 
 // 庆祝动画
 function playCelebrationAnimation() {
-  // 显示祝贺文字
-  const congrats = document.getElementById('congratulations');
-  congrats.classList.add('visible');
+  // 显示愿景
+  const vision = document.getElementById('vision');
+  vision.classList.add('visible');
   
-  // 显示俱乐部信息
-  const clubInfo = document.getElementById('club-info');
-  clubInfo.classList.add('slide-in');
+  // 显示使命
+  const mission = document.getElementById('mission');
+  mission.classList.add('slide-in');
+  
+  // 显示成立日期
+  const foundingDate = document.getElementById('founding-date');
+  foundingDate.classList.add('slide-in');
 }
 
 // 添加星星闪烁动画
