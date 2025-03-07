@@ -220,20 +220,20 @@ body {
   font-weight: 400;
 }
 
-/* 修改揭牌按钮为大型圆形 */
+/* 修改揭牌按钮为超级大型圆形 */
 #reveal-button {
   position: absolute;
   z-index: 20;
-  width: 180px;  /* 设置固定宽度 */
-  height: 180px; /* 设置固定高度，与宽度相同形成圆形 */
+  width: 300px;  /* 进一步增加宽度 */
+  height: 300px; /* 进一步增加高度 */
   background: linear-gradient(135deg, #3498db, #2980b9);
   color: white;
   border: none;
-  border-radius: 50%; /* 设置为50%创建圆形 */
-  font-size: 2.2rem;
-  font-weight: 600;
+  border-radius: 50%;
+  font-size: 3.5rem; /* 进一步增大字体 */
+  font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 0 0 30px rgba(52, 152, 219, 0.6);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 70px rgba(52, 152, 219, 0.8);
   transition: all 0.3s;
   overflow: hidden;
   display: flex;
@@ -243,8 +243,8 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   text-transform: uppercase;
-  letter-spacing: 2px;
-  border: 4px solid rgba(255, 255, 255, 0.2);
+  letter-spacing: 3px;
+  border: 8px solid rgba(255, 255, 255, 0.3);
 }
 
 #reveal-button::before {
@@ -300,9 +300,10 @@ body {
   }
   
   #reveal-button {
-    padding: 18px 40px;
-    font-size: 1.2rem;
-    min-width: 200px;
+    width: 220px;  /* 在小屏幕上适当调整 */
+    height: 220px;
+    font-size: 2.8rem;
+    border-width: 6px;
   }
 }
 
